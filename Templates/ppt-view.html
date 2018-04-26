@@ -1,0 +1,62 @@
+<div class="main col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding" ng-controller="pptCtrl">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding lgMarginTop2">
+        <div class="container noPadding">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding ">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding">
+                    <div class="panel with-nav-tabs panel-default">
+                        <div class="panel-heading">
+                            <ul class="nav nav-tabs">
+                                <li class=" col-xs-6 col-sm-6 col-md-6 col-lg-6 searchTable">
+                                    <input class="form-control " ng-model="searchKeyword" placeholder="search file" type="text">
+                                </li>
+                                <li class="searchTable">
+                                    <button class="btn" ng-click="deletePresentation(responsePPTData)">Delete</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding">
+                                <div class="tab-pane fade in active">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>File Name</th>
+                                                    <th>Presenatation name</th>
+                                                    <th>Metatag</th>
+                                                    <th>Category</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="background:#f9f9f9;">
+                                                <tr ng-repeat="pptData in responsePPTData | filter: searchKeyword " id='prs{{pptData.presentationid}}' >
+                                                    <th>
+                                                        <input type="checkbox" ng-model="pptData.selected" ng-true-value="'{{pptData.presentationid}}'" ng-false-value="''" pptData-pId='{{pptData.presentationid}}'> {{pptData.filename}}</th>
+                                                    <th>{{pptData.presentationname}}</th>
+                                                    <th>{{pptData.metatag}}</th>
+                                                    <th>{{pptData.categoryname}}</th>
+                                                    <th>{{pptData.createddate | date}}</th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="pptModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p id = "mBody">Presentation will be removed</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="closePPopup()">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

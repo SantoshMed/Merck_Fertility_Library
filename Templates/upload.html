@@ -1,0 +1,127 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding lgMarginTop2 smPaddingAllM">
+    <div class="container noPadding ">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 panel with-nav-tabs mdPadddingAll">
+            <form id="uploadForm">
+                <table class="table">
+                    <tr>
+                        <td class="rcolumn" style="width:50%;">
+                            <input type="file" name="file" id="filname" required accept=".ppt,.pptx" /> </td>
+                        <td class="rcolumn">
+                            <input type="text" name="pname" required placeholder="File name*" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="rcolumn">
+                            <input type="text" name="metatag" value="" required placeholder="Tags(Medical, Tablets)*" />
+                        </td>
+                        <td class="rcolumn">
+                            <select name="categoryid" required>
+                                <option value="">-- Select Category --</option>
+                                <option value="10">General ART</option>
+                                <option value="11">Triggering/ Stimulation</option>
+                                <option value="12">Laboratory</option>
+                                <option value="13">Luteal Phase</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="rcolumn">
+                            <textarea rows="4" name="description" placeholder="Description"></textarea>
+                        </td>
+                        <td colspan="2">
+                            <button class="btn" type="submit">Submit</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <progress id="pBar" value="0" max="100"></progress>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p id = "mBody">Presentation uploaded successfully...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="closeUPopup()">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript'>
+/* attach a submit handler to the form */
+$("#uploadForm").submit(function(event) {
+    /* stop form from submitting normally */
+    event.preventDefault();
+    var formData = new FormData(this);
+    //debugger;
+    $.ajax({
+        url: 'service/uploadPresentation.aspx',
+        type: 'POST',
+        data: formData,
+        success: function(data) {
+            $('#mBody').html('Presentation uploaded successfully...');
+            $('#uploadModal').show();
+            document.getElementById("uploadForm").reset();
+            $("#pBar").val(0);
+        },
+        xhr: function() { // custom xhr
+            var xhr = new window.XMLHttpRequest();
+            xhr.upload.addEventListener("progress", function(evt) {
+                if (evt.lengthComputable) {
+                    var percentComplete = evt.loaded / evt.total;
+                    percentComplete = parseInt(percentComplete * 100);
+                    $("#pBar").val(percentComplete);
+                }
+            }, false);
+            return xhr;
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+});
+
+
+
+function UserService() {
+    this.service = "UserService";
+}
+UserService.prototype = new WebService();
+UserService.prototype.getAllPresentation = function(PostData, callback, async) {
+    var request = new RequestHeader("getPresentationList", 0, callback);
+    return this.PostRequest(request, async);
+}
+var _userService = new UserService();
+var data = _userService.getAllPresentation("", null, false); 
+var prsArry = [];
+for(var i=0; i < data.length; i++){
+    prsArry.push(data[i].filename);    
+}
+function checkAvailability(arr, val) {
+  return arr.some(function(arrVal) {
+    return val === arrVal;
+  });
+}
+
+function checkExist(fName){
+    return checkAvailability(prsArry, fName);
+}
+
+document.getElementById('filname').onchange = function () {
+  var name = this.files.item(0).name;
+  if(checkExist(name)){
+    $('#mBody').html('PPT already Exists.');
+    $('#uploadModal').show();
+    this.value = "";
+    this.focus();
+  }
+};
+function closeUPopup(){
+    $('#uploadModal').hide();
+}
+</script>

@@ -1,0 +1,149 @@
+<div class="container-fluid noPadding lgMarginTop2">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding ">
+        <div class="container noPadding">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding ">
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 nopaddingLeft">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 whiteBox">
+                        <h4>IN PROGRESS</h4>
+                        <p>Slides in Progress : <span>{{slideCount}}</span></p>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 whiteBox">
+                        <h4>SUMMARY</h4>
+                        <p>Downloaded files : <span>{{downloadedFile}}</span> </p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 noPaddingRight smMarginTopM">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 whiteBox">
+                        <h4>TUTORIAL VIDEO</h4>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding ">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding">
+            <div class="col-xs-3 col-sm-4 col-md-5 col-lg-5 noPadding slideHeader g1">
+                <div class="circle fRight"></div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2 noPadding textCenter">
+                <h4>Recently Uploaded</h4>
+            </div>
+            <div class="col-xs-3 col-sm-4 col-md-5 col-lg-5 noPadding slideHeader g2">
+                <div class="circle fLeft"></div>
+            </div>
+        </div>
+        <div class="container noPadding smPaddingAllM">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding scroll">
+                <ul ng-controller="newSlide">
+                    <li ng-repeat="data in responsenewSlideData | limitTo:30">
+                        <div class="slides">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding">
+                                <img class='img-responsive' ng-src="service/getImage.aspx?Id={{data.slideid}} &type=small" alt='{{data.slidename}}' />
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 catagory">
+                                <span>{{data.categoryname}}</span>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pName">
+                                <span>{{data.slidename}}</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding">
+            <div class="col-xs-3 col-sm-4 col-md-5 col-lg-5 noPadding slideHeader g1">
+                <div class="circle fRight"></div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2 noPadding textCenter">
+                <h4>Most Searched</h4>
+            </div>
+            <div class="col-xs-3 col-sm-4 col-md-5 col-lg-5 noPadding slideHeader g2">
+                <div class="circle fLeft"></div>
+            </div>
+        </div>
+        <div class="container noPadding smPaddingAllM">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding scroll">
+                <ul ng-controller="MostSearched">
+                    <li ng-repeat="trackdata in responseData.MostSearched | limitTo:30">
+                        <div class="slides">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding">
+                                <img class='img-responsive' ng-src="service/getImage.aspx?Id={{trackdata.slideid}} &type=small" alt='{{trackdata.slidename}}' />
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 catagory">
+                                <span>{{trackdata.categoryname}}</span>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pName">
+                                <span>{{trackdata.slidename}}</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding">
+            <div class="col-xs-3 col-sm-4 col-md-5 col-lg-5 noPadding slideHeader g1">
+                <div class="circle fRight"></div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2 noPadding textCenter">
+                <h4>Most Viewed</h4>
+            </div>
+            <div class="col-xs-3 col-sm-4 col-md-5 col-lg-5 noPadding slideHeader g2">
+                <div class="circle fLeft"></div>
+            </div>
+        </div>
+        <div class="container noPadding smPaddingAllM">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding scroll">
+                <ul ng-controller="MostViewed">
+                    <li ng-repeat="trackdata in responseData.MostViewed | limitTo:30">
+                        <div class="slides">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding">
+                                <img class='img-responsive' ng-src="service/getImage.aspx?Id={{trackdata.slideid}} &type=small" alt='{{trackdata.slidename}}' />
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 catagory">
+                                <span>{{trackdata.categoryname}}</span>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pName">
+                                <span>{{trackdata.slidename}}</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding">
+            <div class="col-xs-3 col-sm-4 col-md-5 col-lg-5 noPadding slideHeader g1">
+                <div class="circle fRight"></div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2 noPadding textCenter">
+                <h4>Most Downloaded</h4>
+            </div>
+            <div class="col-xs-3 col-sm-4 col-md-5 col-lg-5 noPadding slideHeader g2">
+                <div class="circle fLeft"></div>
+            </div>
+        </div>
+        <div class="container noPadding smPaddingAllM">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding scroll">
+                <ul ng-controller="MostDownloaded">
+                    <li ng-repeat="trackdata in responseData.MostDownloaded | limitTo:30 ">
+                        <div class="slides">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding">
+                                <img class='img-responsive' ng-src="service/getImage.aspx?Id={{trackdata.slideid}} &type=small" alt='{{trackdata.slidename}}' />
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 catagory">
+                                <span>{{trackdata.categoryname}}</span>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pName">
+                                <span>{{trackdata.slidename}}</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

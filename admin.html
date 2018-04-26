@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Merck slide sorter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="asset/css/style.css">
+    <link rel="stylesheet" href="asset/css/jquery-ui.css">
+    <link rel="stylesheet" href="asset/css/bootstrap.min.css">
+    <link rel="stylesheet" href="asset/css/font-awesome.min.css">
+    <script src="asset/js/jquery.min.js"></script>
+    <script src="asset/js/jquery-ui.min.js"></script>
+    <script src="asset/js/angular.min.js"></script>
+    <script src="asset/js/angular-route.min.js"></script>
+    <script src="asset/js/bootstrap.min.js"></script>
+    <script src="asset/js/admin.js"></script>
+    <script src="asset/js/webservice.js"></script>
+</head>
+
+<body ng-app="myApp">
+    <!-- mobile menu  starts -->
+    <div class="visible-xs">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand">
+                    <img class="img-responsive" src="asset/images/logo.png"  alt="logo">
+                </a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+                    <ul class="nav navbar-nav">
+                        <li><a ng-class="{active:isActive('/upload')}" href="#upload">UPLOAD</a></li>
+                        <li><a ng-class="{active:isActive('/presentation')}" href="#presentation">PRESENTATION</a></li>
+                        <li><a ng-class="{active:isActive('/slides')}" href="#slides">SLIDES</a></li>
+                        <li><a ng-class="{active:isActive('/report')}" href="#report">REPORTS</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+    </div>
+    <!-- mobile menu ends -->
+    <!-- main menu starts-->
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bgP noPadding hidden-xs fixedP" ng-controller="MainCtrl">
+        <div class="container noPadding">
+            <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 logo noPadding ">
+                <img class="img-responsive" src="asset/images/logo.png" alt="logo">
+            </div>
+            <div class="col-xs-6 col-sm-10 col-md-10 col-lg-10 noPadding ">
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 noPadding ">
+                    <img class="img-responsive" src="asset/images/logocurve.png" alt="logo curve">
+                </div>
+                <div class=" col-sm-6 col-md-9 col-lg-9 noPadding hidden-xs">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding">
+                        <div class="col-sm-offset-3 col-md-offset-8 col-lg-offset-8 col-xs-9 col-sm-9 col-md-4 col-lg-4 noPadding user">
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8  ">
+                                Welcome <span>Admin</span>
+                            </div>
+                            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 noPadding">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 noPadding">
+                                <i class="fa fa-bell" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " id="searchPanel">
+            <div class="container noPadding">
+                <ul>
+                    <li><a ng-class="{active:isActive('/upload')}" href="#upload">UPLOAD</a></li>
+                    <li><a ng-class="{active:isActive('/presentation')}" href="#presentation">PRESENTATION</a></li>
+                    <li><a ng-class="{active:isActive('/slides')}" href="#slides">SLIDES</a></li>
+                    <li><a ng-class="{active:isActive('/report')}" href="#report">REPORTS</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- main menu ends-->
+    <div class="container-fluid noPadding">
+        <div ng-view></div>
+        <!-- footer -->
+        <div ng-include="'include/footer.html'"></div>
+        <!-- footer -->
+    </div>
+    <script>
+    
+    </script>
+</body>
+
+</html>

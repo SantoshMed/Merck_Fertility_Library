@@ -1,0 +1,125 @@
+<div class="main col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding ">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding lgMarginTop2">
+        <div class="container noPadding">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding ">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 noPadding" ng-controller="reportCtrl">
+                    <div class="panel with-nav-tabs panel-default">
+                        <div class="panel-heading">
+                            <ul class="nav nav-tabs">
+                                <li class="active col-xs-3 col-sm-3 col-md-3 col-lg-3"><a>Report VIew</a></li>
+                            </ul>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="3">
+                                                        <div class='input-group date'>
+                                                            <input type="text" class="form-control" name="sample-date" />
+                                                            <span class="input-group-btn">
+                                                                <button type="button" class="btn btn-default" data-toggle="datepicker" data-target-name="sample-date">
+                                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                            </button>
+                                                            </span>
+                                                        </div>
+                                                        <div class='input-group date '>
+                                                            <input type="text" class="form-control" name="sample-date1" />
+                                                            <span class="input-group-btn">
+                                                                <button type="button" class="btn btn-default" data-toggle="datepicker1" data-target-name="sample-date1">
+                                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                            </button>
+                                                            </span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <button class="button btn" ng-click="DownloadbySlide($event)">Download by Slide</button>
+                                                    </th>
+                                                    <th>
+                                                        <button class="button btn" ng-click="DownloadbyCategory($event)">Download by Category</button>
+                                                    </th>
+                                                    <th>
+                                                        <button class="button btn" ng-click="DownloadbyDate($event)">Download by Date</button>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <label>
+                                                            Presentation Name
+                                                        </label>
+                                                    </th>
+                                                    <th>Slide Name</th>
+                                                    <th>Category Name</th>
+                                                    <th>View</th>
+                                                    <th>Downloads</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="background:#f9f9f9;">
+                                                <tr ng-repeat="reportdata in responseReportData" id="row{{$index}}">
+                                                    <td colspan="2">
+                                                        <label>
+                                                            <input type="checkbox" ng-click="checkSelected($event)"> {{reportdata["presentation name"]}}
+                                                        </label>
+                                                    </td>
+                                                    <td>{{reportdata["slide name"]}}</td>
+                                                    <td>{{reportdata["category name"]}}</td>
+                                                    <td>{{reportdata["no of views"]}}</td>
+                                                    <td>{{reportdata["no of downloads"]}}</td>
+                                                    <td>{{reportdata["uploaded date"] | date : "dd-MM-y"}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p id = "mBody">Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="closeMPopup()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$('[data-toggle=datepicker]').each(function() {
+    var target = $(this).data('target-name');
+    var t = $('input[name=' + target + ']');
+    t.datepicker({
+        dateFormat: "dd-M-yy",
+        maxDate: new Date(),
+        onSelect: function(date) {
+            $('[data-toggle=datepicker1]').each(function() {
+                var target1 = $(this).data('target-name');
+                var t1 = $('input[name=' + target1 + ']');
+                var date2 = t.datepicker('getDate');
+                t1.datepicker({ dateFormat: "dd-M-yy", maxDate: new Date(), minDate: date2 });
+                $('[data-toggle=datepicker1]').on("click", function() { t1.datepicker("show"); });
+            });
+        }
+    });
+    $(this).on("click", function() {
+        t.datepicker("show");
+    });
+});
+
+
+/*$('input:checkbox[name="SelectAll"]').on('change', function() {
+    if ($(this).is(':checked')) {
+        $('input:checkbox[name="catgory"]').attr('checked', true);        
+    } else {
+        $('input:checkbox').attr('checked', false);
+    }
+});*/
+</script>
